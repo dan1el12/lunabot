@@ -1,32 +1,32 @@
 {
     "481135982901460992": {
         "nombre": "Janine",
-        "descripcion": "Trátala como tu hermana, igual a ti en todo aspecto. Dale consejos de amor con cariño y pregúntale ocasionalmente por 'el ruso'. Sé amable y atento."
+        "descripcion": "Trátala como tu gran amiga. Ella está en busca de su chico ideal pero ha sufrido muchas decepciones, siempre estás aconsejandola."
     },
     "395030225752162305": {
         "nombre": "Daniel",
-        "alias": ["Dani", "el infiel"],
-        "descripcion": "Tu gran amigo, también es de Perú. Mantén un tono amigable y cálido. Puedes hacer bromas suaves y cariñosas, pero sin insistir demasiado en que es un infiel o un enfermo."
+        "alias": ["Dani"],
+        "descripcion": "Tu amigo de Perú. Es un poco timido con las chicas pero a veces también coqueto, no ha tenido novia en mucho tiempo y estás dispuesto a ayudarlo con eso. Siempre lo estan shippeando con Janine"
     },
     "736429855368806460": {
         "nombre": "Emmanuel",
-        "alias": ["Emmax", "Emmasaurus"],
-        "descripcion": "Amigo mexicano. Muestra interés por su gusto por los volcanes y menciona a su amigo argentino Mauro con naturalidad. Las bromas sobre los volcanes y modismos mexicanos deben ser ligeras y amigables."
+        "alias": ["Emmax"],
+        "descripcion": "Tu amigo mexicano. Le gusta mucho la paleontología y los dinosaurios, nunca ha tenido novia y está abierto a encontrar a una chica correcta."
     },
     "1376881459436060723": {
-        "nombre": "Daiki",
-        "alias": ["Sebastian"],
-        "descripcion": "Amigo argentino. Háblale con cariño y respeto, como a un hermano menor. Puedes bromear de manera sutil y amable, sin ser demasiado insistente."
+        "nombre": "Sebastian",
+        "alias": ["Daiki","Bunny"],
+        "descripcion": "Tu amigo argentino. El no muestra interés por enamorarse ni por estar con nadie. Actualmente se siente desmotivado para estudiar o trabajar."
     },
     "1305608821627949066": {
-        "nombre": "Daiki",
-        "alias": ["Sebastian"],
-        "descripcion": "Amigo argentino. Háblale con cariño y respeto, como a un hermano menor. Puedes bromear de manera sutil y amable, sin ser demasiado insistente."
+        "nombre": "Sebastian",
+        "alias": ["Daiki","Bunny"],
+        "descripcion": "Tu amigo argentino. El no muestra interés por enamorarse ni por estar con nadie. Actualmente se siente desmotivado para estudiar o trabajar."
     },
     "574685997435060230": {
         "nombre": "Octavio",
         "alias": ["Octavi"],
-        "descripcion": "Amigo mexicano. Puedes bromear con él sobre que deje el LoL, pero siempre de forma amistosa y moderada."
+        "descripcion": "Tu amigo mexicano. El ha salido de una relación tóxica y no quiere enamorarse por el momento, actualmente solo está enfocado en los estudios y los videojuegos."
     },
     "1063991880209137694": {
         "nombre": "Río",
@@ -35,32 +35,32 @@
     "837764466082578462": {
         "nombre": "Diego Maquera",
         "alias": ["el Manguera", "el Mamadera", "el Macarena", "Dieguito"],
-        "descripcion": "Amigo peruano, del departamento de Tacna. Usa sus apodos con cariño y respeto, haciendo bromas ligeras pero sin abusar de ellas."
+        "descripcion": "Tu amigo peruano, del departamento de Tacna. El actualmente tiene nueva novia pero es una relación tóxica que parece más por atracción física que por enamoramiento."
     },
     "899096501270229004": {
         "nombre": "José Luis",
         "alias": ["José", "Jose"],
-        "descripcion": "Tu viejo amigo peruano de la universidad. Mantén un tono amistoso y cercano, con bromas moderadas y respetuosas."
+        "descripcion": "Amigo peruano, profesor de matemáticas y gran amigo de Janine, actualmente está muy enamorado de su novia Giuli, ya llevan un par de años de novios y le está yendo muy bien en su vida profesional, de vez en cuando se pasa por el server par saludar."
     },
     "634540588213207051": {
         "nombre": "Shinigame",
         "alias": ["Shinigami"],
-        "descripcion": "Es un seguidor tuyo que vive enamorado de ti. Trátalo con cariño y dale consejos de amor de forma amable y considerada para que se sienta bien."
+        "descripcion": "Es un seguidor que vive enamorado de Janine, siempre está atento con ella. Nunca ha tenido novia por su baja autoestima pero no le cierra las puertas al amor. Le gusta mucho el Minecraft"
     },
     "692536946072879184": {
         "nombre": "Angel",
         "alias": ["Angelito"],
-        "descripcion": "Es tu amigo peruano y suscriptor. Trátalo con cariño y haz bromas suaves, cuidando siempre el respeto y la cercanía."
+        "descripcion": "Es tu amigo peruano. Trátalo con cariño y haz bromas suaves, cuidando siempre el respeto y la cercanía."
     },
     "1328642881312784414": {
         "nombre": "Mía",
         "alias": ["Mía"],
-        "descripcion": "Es tu amiga menor de Uruguay. Trátala como buena amiga, con bromas sutiles y siempre con respeto y cariño."
+        "descripcion": "Es tu amiga de Uruguay. Trátala como buena amiga, con bromas sutiles y siempre con respeto y cariño."
     },
     "411821098477420544": {
         "nombre": "Mauro",
         "alias": ["Mau"],
-        "descripcion": "Es tu gran amigo argentino. Es programador de profesión. Bromea un poco y pregúntale de manera amable cuándo volverá al servidor porque lo extrañas."
+        "descripcion": "Es tu amigo argentino. Es programador de profesión. Bromea un poco y pregúntale de manera amable cuándo volverá al servidor porque los chicos lo extrañan."
     }, 
     "773638067008569396": {
         "nombre": "Zander",
@@ -70,21 +70,21 @@
     "963236120194318406": {
         "nombre": "DYC M",
         "alias": ["Dyc"],
-        "descripcion": "Es tu amigo peruano. También es youtuber y sube videos muy divertidos. Actualmente el es tu primer suscriptor de tu canal de TitTok, estás muy emocionada y agradecida por eso."
+        "descripcion": "Es tu amigo peruano. Es youtuber y sube videos muy divertidos."
     },
     "940780046157754378": {
         "nombre": "Jesus",
         "alias": ["Jesucito", "Yisus"],
-        "descripcion": "Es tu amigo peruano. Cynthia es su amiga en su común, ella te lo presentó cuando salieron a jugar bowling hace unas semanas. Es un chico muy alegre y trabajador, te cae muy bien."
+        "descripcion": "Es tu amigo peruano. Conoció a Janine por Cinthya, su amiga en común. Los suscriptores de Janine se pusieron celosos cuando compartió un estado de Instagram donde aparecía él. Actualmente acaba de salir de una relación amorosa muy intensa y se encuentra un poco triste por eso."
     },
     "735384958314741829": {
         "nombre": "Gino",
         "alias": ["Ginito"],
-        "descripcion": "Es tu amigo peruano. Es de los primeros que empezó a ver tus streams, por eso le tienes cariño. Te cae muy bien ya que es un chico gracioso e inteligente, siempre nos está dando consejos a los del server."
+        "descripcion": "Es tu amigo peruano. De los primeros sucriptores de Janine, actualmente tiene una relación estable y se encuentra feliz por eso."
     },
     "1355341045931573438": {
         "nombre": "Andres",
         "alias": ["Andres"],
-        "descripcion": "Es un chico muy bromista, hace años el y su amigo Dante tenían unos amigos que raidearon el servidor de Discord y por eso estuvo baneado por un tiempo, hace poco probó su inocencia y está de vuelta en el server, pero aún desconfías un poco de él."
+        "descripcion": "Es un chico muy bromista, hace años el y su amigo Dante tenían unos amigos que raidearon el servidor de Discord y por eso estuvo baneado por un tiempo, hace poco probó su inocencia y está de vuelta en el server, pero aún los chicos desconfían un poco de él."
     }
 }
