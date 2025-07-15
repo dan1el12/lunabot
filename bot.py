@@ -95,6 +95,8 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.guilds = True
+intents.members = True
 
 client = commands.Bot(command_prefix="!", intents=intents)
 tree = client.tree
@@ -296,10 +298,14 @@ async def opinar(interaction: discord.Interaction):
 
 @client.event
 async def on_message(message):
+    print(f"Mensaje recibido: {message.content}")
+    print(f"Menciones: {[m.name for m in message.mentions]}")
 
     await client.process_commands(message)
     
     if client.user in message.mentions and not message.mention_everyone and not message.author.bot:
+        print("✅ El bot fue mencionado.")
+
         memoria = cargar_memoria()
         historial = cargar_historial()
         canal_id = str(message.channel.id)
