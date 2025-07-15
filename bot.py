@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 import pytz
 import re
+from discord.ext import commands
 
 zona_horaria = pytz.timezone("America/Lima")
 
@@ -94,8 +95,9 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
-tree = discord.app_commands.CommandTree(client)
+
+client = commands.Bot(command_prefix="!", intents=intents)
+tree = client.tree
 
 async def ask_deepseek(prompt, user_id, historial_usuario):
     url = "https://openrouter.ai/api/v1/chat/completions"
@@ -295,18 +297,9 @@ async def opinar(interaction: discord.Interaction):
 @client.event
 async def on_message(message):
 
-    print(f"[DEBUG] Se recibió un mensaje: {message.content}")
-
-    # IMPORTANTE: Permitir comandos slash y otros eventos
     await client.process_commands(message)
-
+    
     if client.user in message.mentions and not message.mention_everyone and not message.author.bot:
-
-        if client.user in message.mentions:
-            print("[DEBUG] ¡Mencionaron al bot!")
-        else:
-            print("[DEBUG] No hay mención al bot.")
-
         memoria = cargar_memoria()
         historial = cargar_historial()
         canal_id = str(message.channel.id)
