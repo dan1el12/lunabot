@@ -294,7 +294,19 @@ async def opinar(interaction: discord.Interaction):
 
 @client.event
 async def on_message(message):
+
+    print(f"[DEBUG] Se recibió un mensaje: {message.content}")
+
+    # IMPORTANTE: Permitir comandos slash y otros eventos
+    await client.process_commands(message)
+
     if client.user in message.mentions and not message.mention_everyone and not message.author.bot:
+
+        if client.user in message.mentions:
+            print("[DEBUG] ¡Mencionaron al bot!")
+        else:
+            print("[DEBUG] No hay mención al bot.")
+
         memoria = cargar_memoria()
         historial = cargar_historial()
         canal_id = str(message.channel.id)
