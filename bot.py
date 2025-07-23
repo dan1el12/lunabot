@@ -7,6 +7,28 @@ from datetime import datetime
 import pytz
 import re
 from discord.ext import commands
+from elevenlabs import generate, save, set_api_key
+import aiofiles
+
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
+set_api_key(ELEVENLABS_API_KEY)
+
+VOICE_ID = "uuoIgAD97rAJ1WdElwaT"
+
+async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp3"):
+    try:
+        audio = generate(
+            text=respuesta,
+            voice=VOICE_ID,
+            model="eleven_multilingual_v2",
+            stream=False,
+            latency="low"
+        )
+        save(audio, nombre_archivo)
+        return nombre_archivo
+    except Exception as e:
+        print("Error generando audio:", e)
+        return None
 
 zona_horaria = pytz.timezone("America/Lima")
 
@@ -375,7 +397,16 @@ async def on_message(message):
             if len(respuesta) > 1990:
                 respuesta = respuesta[:1990]
 
-            await message.reply(f"{message.author.mention} {respuesta}", mention_author=True)
+            audio_path = await generar_audio(respuesta)
+            if audio_path and os.path.exists(audio_path):
+                await message.reply(
+                    content=f"{message.author.mention} {respuesta}",
+                    file=discord.File(audio_path),
+                    mention_author=True
+                )
+                os.remove(audio_path)  # Elimina el archivo después de enviarlo
+            else:
+                await message.reply(f"{message.author.mention} {respuesta}", mention_author=True)
 
         except Exception as e:
             await message.reply(f"Error en la respuesta: {e}", mention_author=True)
