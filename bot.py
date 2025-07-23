@@ -29,17 +29,26 @@ el_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
 
 async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp3"):
     try:
-        audio = el_client.text_to_speech.convert(
+        ruta_archivo = f"/tmp/{nombre_archivo}"
+
+        # Solicita el audio a ElevenLabs
+        audio_bytes = el_client.text_to_speech.convert(
             voice_id=VOICE_ID,
             model_id="eleven_multilingual_v2",
             text=respuesta,
-            output_format="mp3_44100_128"
+            output_format="mp3_44100",
+            optimize_streaming_latency="0"
         )
-        async with aiofiles.open(nombre_archivo, "wb") as f:
-            await f.write(audio)
-        return nombre_archivo
+
+        # Guarda el archivo de forma asíncrona
+        async with aiofiles.open(ruta_archivo, "wb") as f:
+            await f.write(audio_bytes)
+
+        print(f"✅ Audio generado: {ruta_archivo}")
+        return ruta_archivo
+
     except Exception as e:
-        print("Error generando audio:", e)
+        print("❌ Error generando audio:", e)
         return None
 
 def obtener_fecha_actual():
@@ -404,13 +413,14 @@ async def on_message(message):
                 respuesta = respuesta[:1990]
 
             audio_path = await generar_audio(respuesta)
+            
             if audio_path and os.path.exists(audio_path):
                 await message.reply(
                     content=f"{message.author.mention} {respuesta}",
                     file=discord.File(audio_path),
                     mention_author=True
                 )
-                os.remove(audio_path)  # Elimina el archivo después de enviarlo
+                os.remove(audio_path)
             else:
                 await message.reply(f"{message.author.mention} {respuesta}", mention_author=True)
 
