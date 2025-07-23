@@ -31,8 +31,7 @@ async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp
     try:
         ruta_archivo = f"/tmp/{nombre_archivo}"
 
-        # Solicita el audio a ElevenLabs
-        audio_bytes = el_client.text_to_speech.convert(
+        stream_generator = el_client.text_to_speech.convert(
             voice_id=VOICE_ID,
             model_id="eleven_multilingual_v2",
             text=respuesta,
@@ -40,11 +39,10 @@ async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp
             optimize_streaming_latency="0"
         )
 
-        # Guarda el archivo de forma asíncrona
         async with aiofiles.open(ruta_archivo, "wb") as f:
-            await f.write(audio_bytes)
+            for chunk in stream_generator:
+                await f.write(chunk)
 
-        print(f"✅ Audio generado: {ruta_archivo}")
         return ruta_archivo
 
     except Exception as e:
@@ -413,7 +411,7 @@ async def on_message(message):
                 respuesta = respuesta[:1990]
 
             audio_path = await generar_audio(respuesta)
-            
+
             if audio_path and os.path.exists(audio_path):
                 await message.reply(
                     content=f"{message.author.mention} {respuesta}",
