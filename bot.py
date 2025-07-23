@@ -7,34 +7,40 @@ from datetime import datetime
 import pytz
 import re
 from discord.ext import commands
-from elevenlabs import generate, save, set_api_key
+from elevenlabs import ElevenLabs
 import aiofiles
 
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-set_api_key(ELEVENLABS_API_KEY)
+VOICE_ID = "uuoIgAD97rAJ1WdElwaT"  # Tu ID de voz de Luna
 
-VOICE_ID = "uuoIgAD97rAJ1WdElwaT"
+zona_horaria = pytz.timezone("America/Lima")
+MEMORIA_ARCHIVO = "memoria.json"
+HISTORIAL_ARCHIVO = "historial.json"
+MAX_MENSAJES_HISTORIAL = 5
+
+client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+tree = client.tree
+
+# Configurar cliente de ElevenLabs
+el_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
 
 async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp3"):
     try:
-        audio = generate(
+        audio = el_client.text_to_speech.convert(
+            voice_id=VOICE_ID,
+            model_id="eleven_multilingual_v2",
             text=respuesta,
-            voice=VOICE_ID,
-            model="eleven_multilingual_v2",
-            stream=False,
-            latency="low"
+            output_format="mp3_44100_128"
         )
-        save(audio, nombre_archivo)
+        async with aiofiles.open(nombre_archivo, "wb") as f:
+            await f.write(audio)
         return nombre_archivo
     except Exception as e:
         print("Error generando audio:", e)
         return None
-
-zona_horaria = pytz.timezone("America/Lima")
-
-MEMORIA_ARCHIVO = "memoria.json"
-HISTORIAL_ARCHIVO = "historial.json"
-MAX_MENSAJES_HISTORIAL = 5
 
 def obtener_fecha_actual():
     dias = {

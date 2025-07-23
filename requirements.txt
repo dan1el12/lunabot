@@ -2,5 +2,5 @@ aiofiles
 aiohttp
 discord.py
 python-dotenv
-elevenlabs
+elevenlabs>=1.0.0
 pytz
