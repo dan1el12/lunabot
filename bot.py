@@ -24,19 +24,23 @@ tree = client.tree
 # Cargar modelo TTS solo una vez, compatible con CPU
 tts_model = TTS(model_name="tts_models/es/css10/vits", progress_bar=False, gpu=False)
 
+def limpiar_texto_para_tts(texto: str) -> str:
+    # Elimina signos de apertura ¿ ¡ y emojis tipo :emoji:
+    texto = re.sub(r'[¿¡]', '', texto)
+    # Elimina placeholders tipo :emoji:
+    texto = re.sub(r':[a-zA-Z0-9_]+:', '', texto)
+    # Opcional: puedes eliminar emojis unicode si los usas
+    texto = re.sub(r'[\U00010000-\U0010ffff]', '', texto)  # elimina emojis unicode si están presentes
+    return texto.strip()
+
+
 async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.wav"):
     try:
-        # Si la carpeta no existe (por ejemplo, al usar Railway), la crea
-        os.makedirs(os.path.dirname(nombre_archivo), exist_ok=True) if "/" in nombre_archivo else None
-
-        # Genera y guarda el audio
-        tts_model.tts_to_file(
-            text=respuesta,
-            file_path=nombre_archivo
-        )
+        texto_limpio = limpiar_texto_para_tts(respuesta)
+        tts_model.tts_to_file(text=texto_limpio, file_path=nombre_archivo)
         return nombre_archivo
     except Exception as e:
-        print("❌ Error generando audio:", e)
+        print("Error generando audio:", e)
         return None
 
 def obtener_fecha_actual():
