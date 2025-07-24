@@ -1,7 +1,15 @@
-TTS==0.22.0
-torch>=1.10.0
-numpy
-soundfile
+# Discord bot & entorno
 discord.py
-aiohttp
 python-dotenv
+aiohttp
+pytz
+
+# Librerías necesarias para TTS
+soundfile
+numpy
+
+# Torch CPU para evitar instalación pesada
+https://download.pytorch.org/whl/cpu/torch-2.0.1%2Bcpu-cp310-cp310-linux_x86_64.whl
+
+# TTS compatible con Python 3.10
+TTS==0.22.0
