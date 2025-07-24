@@ -7,14 +7,11 @@ from datetime import datetime
 import pytz
 import re
 from discord.ext import commands
-from elevenlabs import ElevenLabs
-import aiofiles
+from TTS.api import TTS
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-VOICE_ID = "uuoIgAD97rAJ1WdElwaT"  # Tu ID de voz de Luna
 
 zona_horaria = pytz.timezone("America/Lima")
 MEMORIA_ARCHIVO = "memoria.json"
@@ -24,29 +21,16 @@ MAX_MENSAJES_HISTORIAL = 5
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 tree = client.tree
 
-# Configurar cliente de ElevenLabs
-el_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
+tts = TTS(model_name="tts_models/es/mai/tacotron2-DDC", progress_bar=False, gpu=False)
 
-async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.mp3"):
+tts_model = TTS(model_name="tts_models/es/mai/tacotron2-DDC", progress_bar=False, gpu=False)
+
+async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.wav"):
     try:
-        ruta_archivo = f"/tmp/{nombre_archivo}"
-
-        stream_generator = el_client.text_to_speech.convert(
-            voice_id=VOICE_ID,
-            model_id="eleven_multilingual_v2",
-            text=respuesta,
-            output_format="mp3_44100",
-            optimize_streaming_latency="0"
-        )
-
-        async with aiofiles.open(ruta_archivo, "wb") as f:
-            for chunk in stream_generator:
-                await f.write(chunk)
-
-        return ruta_archivo
-
+        tts_model.tts_to_file(text=respuesta, file_path=nombre_archivo)
+        return nombre_archivo
     except Exception as e:
-        print("❌ Error generando audio:", e)
+        print("Error generando audio:", e)
         return None
 
 def obtener_fecha_actual():
@@ -411,7 +395,6 @@ async def on_message(message):
                 respuesta = respuesta[:1990]
 
             audio_path = await generar_audio(respuesta)
-
             if audio_path and os.path.exists(audio_path):
                 await message.reply(
                     content=f"{message.author.mention} {respuesta}",

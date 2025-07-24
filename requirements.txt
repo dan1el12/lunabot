@@ -1,6 +1,8 @@
-aiofiles
 aiohttp
 discord.py
 python-dotenv
-elevenlabs>=1.0.0
 pytz
+TTS==0.22.0
+torch
+librosa
+numpy
