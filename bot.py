@@ -21,16 +21,22 @@ MAX_MENSAJES_HISTORIAL = 5
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 tree = client.tree
 
-tts = TTS(model_name="tts_models/es/mai/glow-tts", progress_bar=False, gpu=False)
-
-tts_model = TTS(model_name="tts_models/es/mai/glow-tts", progress_bar=False, gpu=False)
+# Cargar modelo TTS solo una vez, compatible con CPU
+tts_model = TTS(model_name="tts_models/es/css10/vits", progress_bar=False, gpu=False)
 
 async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.wav"):
     try:
-        tts_model.tts_to_file(text=respuesta, file_path=nombre_archivo)
+        # Si la carpeta no existe (por ejemplo, al usar Railway), la crea
+        os.makedirs(os.path.dirname(nombre_archivo), exist_ok=True) if "/" in nombre_archivo else None
+
+        # Genera y guarda el audio
+        tts_model.tts_to_file(
+            text=respuesta,
+            file_path=nombre_archivo
+        )
         return nombre_archivo
     except Exception as e:
-        print("Error generando audio:", e)
+        print("❌ Error generando audio:", e)
         return None
 
 def obtener_fecha_actual():
