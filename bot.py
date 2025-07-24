@@ -21,9 +21,9 @@ MAX_MENSAJES_HISTORIAL = 5
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 tree = client.tree
 
-tts = TTS(model_name="tts_models/es/mai/tacotron2-DDC", progress_bar=False, gpu=False)
+tts = TTS(model_name="tts_models/es/mai/glow-tts", progress_bar=False, gpu=False)
 
-tts_model = TTS(model_name="tts_models/es/mai/tacotron2-DDC", progress_bar=False, gpu=False)
+tts_model = TTS(model_name="tts_models/es/mai/glow-tts", progress_bar=False, gpu=False)
 
 async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.wav"):
     try:
