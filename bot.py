@@ -7,7 +7,6 @@ from datetime import datetime
 import pytz
 import re
 from discord.ext import commands
-from TTS.api import TTS
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -20,28 +19,6 @@ MAX_MENSAJES_HISTORIAL = 5
 
 client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 tree = client.tree
-
-# Cargar modelo TTS solo una vez, compatible con CPU
-tts_model = TTS(model_name="tts_models/es/css10/vits", progress_bar=False, gpu=False)
-
-def limpiar_texto_para_tts(texto: str) -> str:
-    # Elimina signos de apertura ¿ ¡ y emojis tipo :emoji:
-    texto = re.sub(r'[¿¡]', '', texto)
-    # Elimina placeholders tipo :emoji:
-    texto = re.sub(r':[a-zA-Z0-9_]+:', '', texto)
-    # Opcional: puedes eliminar emojis unicode si los usas
-    texto = re.sub(r'[\U00010000-\U0010ffff]', '', texto)  # elimina emojis unicode si están presentes
-    return texto.strip()
-
-
-async def generar_audio(respuesta: str, nombre_archivo: str = "luna_respuesta.wav"):
-    try:
-        texto_limpio = limpiar_texto_para_tts(respuesta)
-        tts_model.tts_to_file(text=texto_limpio, file_path=nombre_archivo)
-        return nombre_archivo
-    except Exception as e:
-        print("Error generando audio:", e)
-        return None
 
 def obtener_fecha_actual():
     dias = {
@@ -404,16 +381,7 @@ async def on_message(message):
             if len(respuesta) > 1990:
                 respuesta = respuesta[:1990]
 
-            audio_path = await generar_audio(respuesta)
-            if audio_path and os.path.exists(audio_path):
-                await message.reply(
-                    content=f"{message.author.mention} {respuesta}",
-                    file=discord.File(audio_path),
-                    mention_author=True
-                )
-                os.remove(audio_path)
-            else:
-                await message.reply(f"{message.author.mention} {respuesta}", mention_author=True)
+            await message.reply(f"{message.author.mention} {respuesta}", mention_author=True)
 
         except Exception as e:
             await message.reply(f"Error en la respuesta: {e}", mention_author=True)
